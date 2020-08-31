@@ -4,6 +4,7 @@ import HomeScreen from "./screens/HomeScreen";
 import ProductScreen from "./screens/ProductScreen";
 import CartScreen from './screens/CartScreen';
 import SignInScreen from './screens/SignInScreen';
+import { useSelector } from 'react-redux';
 
 function App() {
   function openmenu(){
@@ -12,6 +13,8 @@ function App() {
   function closemenu(){
     document.querySelector(".sidebar").classList.remove("open");
   }
+  const userSignin=useSelector(state => state.userSignin);
+  const {userInfo}=userSignin;
   return (
     <BrowserRouter>
     <div class="grid-container">
@@ -23,7 +26,7 @@ function App() {
     <Link to="/">ecomm</Link></div>
     <div class="header-links">
     <Link to="/cart">Cart</Link>
-    <Link to="/signin">Sign In</Link>
+    {userInfo?<Link to="/profile">{userInfo.name}</Link>:<Link to="/signin">Sign In</Link>}
     </div>
     </header>
    <aside class="sidebar">
