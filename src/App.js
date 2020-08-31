@@ -5,6 +5,7 @@ import ProductScreen from "./screens/ProductScreen";
 import CartScreen from './screens/CartScreen';
 import SignInScreen from './screens/SignInScreen';
 import { useSelector } from 'react-redux';
+import RegisterScreen from './screens/RegisterScreen';
 
 function App() {
   function openmenu(){
@@ -47,7 +48,7 @@ function App() {
     <Route path="/cart/:id?" component={CartScreen} />
     <Route path="/products/:id" exact={true} component={ProductScreen} />
     <Route path="/signin" exact={true} component={SignInScreen} />
-
+    <Route path="/register" exact={true} component={RegisterScreen} />
     </div>
 
     </main>
