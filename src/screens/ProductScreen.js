@@ -24,7 +24,7 @@ function ProductScreen(props){
     {  loading?<div>Loading...</div>:
     error?<div>{error}</div>:
     <div className="details">
-    <div className="details-image"><img src={product.img} alt={product.name} /></div>
+    <div className="details-image"><img src={product.image} alt={product.name} /></div>
     <div className="details-info">
        <ul>
        <li><h4>{product.name}</h4></li>
@@ -39,7 +39,7 @@ function ProductScreen(props){
 <li >Status: <div style={{color:product.countItems===0?"red":"green",display:"inline-block"}}>{product.countItems===0?"Out Of Stock":"In Stock"}</div></li>
 {product.countItems===0? "" :<div><li>
 Qty: <select value={qty} onChange={(event) => setQty(event.target.value) }>
-{[...Array(product.countItems).keys()].map(x =>
+{[...Array(product.countInStock).keys()].map(x =>
 <option key={x+1} value={x+1}>{x+1}</option>
 )}
 </select>

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import {Link} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { register } from '../actions/userActions';
-import { PromiseProvider } from 'mongoose';
 
 function RegisterScreen(props){
     const [name,setName]=useState('');
@@ -11,11 +10,12 @@ function RegisterScreen(props){
     const [repass,setTrackPass]=useState('');
     const userRegister=useSelector(state => state.userRegister);
     const {loading,userInfo,error}=userRegister;
+    const redirect=props.location.search?props.location.search.split("=")[1]:"/";
     const dispatch=useDispatch();
 
     useEffect(()=>{
        if(userInfo){
-           props.history.push("/");
+           props.history.push(redirect);
        }
         return () => {
             //
@@ -63,7 +63,7 @@ function RegisterScreen(props){
                </li>
                <li>Already have an account ?</li>
                <li>
-                   <Link to="/signin"><button className="button full-width">Sign-In to your account</button></Link>
+                   <Link to={redirect==="/"?"/signin":"/signin?redirect="+redirect}><button className="button full-width">Sign-In to your account</button></Link>
                </li>
            </ul>
       </form>

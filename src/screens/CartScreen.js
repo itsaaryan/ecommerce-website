@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { productDetailsReducer } from '../reducers/productReducers';
 import {addToCart,removeFromCart} from '../actions/cartActions';
 import { useDispatch, useSelector } from 'react-redux';
 import {Link} from 'react-router-dom';
@@ -19,7 +18,7 @@ const {cartItems}=cart;
     dispatch(removeFromCart(productId)); 
     }
     const checkoutHandler=() =>{
-      props.history.push("/sighin?redirect=shipping");
+      props.history.push("/signin?redirect=shipping");
     }
     return(
       <div className="cart">
@@ -37,19 +36,19 @@ const {cartItems}=cart;
     <li>
      <div className="cart-image">
      <Link to={"/products/"+item.product}>
-     <img src={item.image} alt={item.name}  />
+     <img src={item.image} alt={item.name} />
      </Link>
      </div>
       
       <div className="cart-name">
       <div>
-      <Link to={"/products/"+item.product}>
+      <Link to={"/products/"+item._id}>
       {item.name}
       </Link>
       </div>
       <div>
         Oty: <select value={item.qty}  onChange={(e) => dispatch(addToCart(item.product,e.target.value))}>
-        {[...Array(item.countItems).keys()].map(x =>
+        {[...Array(item.countInStock).keys()].map(x =>
               <option key={x+1} value={x+1}>{x+1}</option>
               )}
         </select>

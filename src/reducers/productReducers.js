@@ -1,5 +1,10 @@
-import React from 'react';
-import { PRODUCT_LIST_REQUEST, PRODUCT_LIST_SUCCESS, PRODUCT_LIST_FAIL, PRODUCT_DETAILS_REQUEST, PRODUCT_DETAILS_SUCCESS, PRODUCT_DETAILS_FAIL } from '../constants/productConstants';
+import { PRODUCT_LIST_REQUEST, PRODUCT_LIST_SUCCESS, PRODUCT_LIST_FAIL,
+     PRODUCT_DETAILS_REQUEST, PRODUCT_DETAILS_SUCCESS,PRODUCT_DETAILS_FAIL, 
+     PRODUCT_SAVE_REQUEST, PRODUCT_SAVE_SUCCESS,
+       PRODUCT_SAVE_FAIL, 
+       PRODUCT_DEL_FAIL,
+       PRODUCT_DEL_REQUEST,
+       PRODUCT_DEL_SUCCESS} from '../constants/productConstants';
 
 const initialstate={
     loading:false,
@@ -66,4 +71,49 @@ const productDetailsReducer=(state=initialstateofProduct,action) => {
     }
 }
 
-export  {productListReducer,productDetailsReducer}
+const productSaveReducer = (state=initialstateofProduct,action) => {
+    switch (action.type) {
+        case PRODUCT_SAVE_REQUEST:
+              return {
+                  loading:true
+              }
+        case PRODUCT_SAVE_SUCCESS:
+            return {
+                loading:false,
+                success:true,
+                product:action.payload
+            } 
+        case PRODUCT_SAVE_FAIL:
+            return {
+                laoding:false,
+                error:action.payload
+            } 
+            
+        default:
+            return state;
+    }
+}
+
+const productDeleteReducer = (state={product:{}},action) => {
+    switch (action.type) {
+        case PRODUCT_DEL_REQUEST:
+            return {
+                laoding:true
+            }
+        case PRODUCT_DEL_SUCCESS:
+            return {
+                laoding:false,
+                success:true,
+                product:action.payload
+            }
+        case PRODUCT_DEL_FAIL:
+            return {
+                loading:false,
+                error:action.payload
+            }
+        default:
+            return state;
+    }
+}
+
+export  {productListReducer,productDetailsReducer,productSaveReducer,productDeleteReducer};
